@@ -100,7 +100,7 @@
                                         $savedPermissions = json_decode($jsonContent, true) ?? [];
                                     }
 
-                                    // Default permissions jika belum ada file
+                                    // Default permissions jika belum ada file ilham
                                     $defaultPermissions = [
                                         'superadmin' => [
                                             'manage_komoditas' => true,
