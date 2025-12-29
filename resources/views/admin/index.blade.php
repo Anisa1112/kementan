@@ -84,10 +84,8 @@
                                         ['name' => 'Akses Sektor Peternakan', 'key' => 'access_sector_peternakan', 'desc' => 'Dapat melihat data komoditas peternakan', 'category' => 'sector_komoditas', 'icon' => 'ti-pig', 'color' => 'danger'],
 
                                         // Sector PSP Permissions
-                                        ['name' => 'Akses PSP Tanaman Pangan', 'key' => 'access_psp_pangan', 'desc' => 'Dapat melihat data PSP tanaman pangan', 'category' => 'sector_psp', 'icon' => 'ti-grain', 'color' => 'warning'],
-                                        ['name' => 'Akses PSP Hortikultura', 'key' => 'access_psp_horti', 'desc' => 'Dapat melihat data PSP hortikultura', 'category' => 'sector_psp', 'icon' => 'ti-leaf', 'color' => 'success'],
-                                        ['name' => 'Akses PSP Perkebunan', 'key' => 'access_psp_perkebunan', 'desc' => 'Dapat melihat data PSP perkebunan', 'category' => 'sector_psp', 'icon' => 'ti-tree', 'color' => 'info'],
-                                        ['name' => 'Akses PSP Peternakan', 'key' => 'access_psp_peternakan', 'desc' => 'Dapat melihat data PSP peternakan', 'category' => 'sector_psp', 'icon' => 'ti-pig', 'color' => 'danger'],
+                                        ['name' => 'Akses PSP', 'key' => 'access_psp', 'desc' => 'Dapat melihat data PSP', 'category' => 'sector_psp', 'icon' => 'ti-grain', 'color' => 'warning'],
+
                                     ];
 
                                     $roles = ['superadmin', 'admin_pusdatin', 'admin_eselon', 'user'];
@@ -109,10 +107,7 @@
                                             'access_sector_horti' => true,
                                             'access_sector_perkebunan' => true,
                                             'access_sector_peternakan' => true,
-                                            'access_psp_pangan' => true,
-                                            'access_psp_horti' => true,
-                                            'access_psp_perkebunan' => true,
-                                            'access_psp_peternakan' => true,
+                                            'access_psp' => true,
                                         ],
                                         'admin_pusdatin' => [
                                             'manage_komoditas' => true,
@@ -121,10 +116,7 @@
                                             'access_sector_horti' => true,
                                             'access_sector_perkebunan' => true,
                                             'access_sector_peternakan' => true,
-                                            'access_psp_pangan' => true,
-                                            'access_psp_horti' => true,
-                                            'access_psp_perkebunan' => true,
-                                            'access_psp_peternakan' => true,
+                                            'access_psp' => true,
                                         ],
                                         'admin_eselon' => [
                                             'manage_komoditas' => true,
@@ -133,20 +125,17 @@
                                             'access_sector_horti' => true,
                                             'access_sector_perkebunan' => true,
                                             'access_sector_peternakan' => true,
-                                            'access_psp_pangan' => true,
-                                            'access_psp_horti' => true,
-                                            'access_psp_perkebunan' => true,
-                                            'access_psp_peternakan' => true,
+                                            'access_psp' => true,
+
                                         ],
                                         'user' => [
+                                            'manage_komoditas' => true,
+                                            'manage_psp' => true,
                                             'access_sector_pangan' => true,
                                             'access_sector_horti' => true,
                                             'access_sector_perkebunan' => true,
                                             'access_sector_peternakan' => true,
-                                            'access_psp_pangan' => true,
-                                            'access_psp_horti' => true,
-                                            'access_psp_perkebunan' => true,
-                                            'access_psp_peternakan' => true,
+                                            'access_psp' => true,
                                         ],
                                     ];
 

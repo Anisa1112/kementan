@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/psp/{id}', [PrasaranaSaranaController::class, 'show'])->name('psp.show');
     Route::put('/psp/{id}', [PrasaranaSaranaController::class, 'update'])->name('psp.update');
     Route::delete('/psp/{id}', [PrasaranaSaranaController::class, 'destroy'])->name('psp.destroy');
-}); 
+});
 
 // routes/web.php
 use App\Http\Controllers\RoleController;

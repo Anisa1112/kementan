@@ -117,11 +117,13 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (hasPermission('access_psp'))
                                 <li class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') == 'psp' ? 'active' : '' }}">
                                     <a href="{{ route('komoditas') }}?tab=psp" class="menu-link">
                                         <div data-i18n="Prasarana dan Sarana">Prasarana & Sarana</div>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
 
@@ -192,30 +194,38 @@
                                     <li>
                                         <h6 class="dropdown-header">Data Per Sektor</h6>
                                     </li>
+                                    @if (hasPermission('accsess_sector_pangan'))
                                     <li>
                                         <a class="dropdown-item" href="{{ route('komoditas.sektor', 'tanaman-pangan') }}">
                                             <i class="ti ti-plant-2 me-2 text-success"></i>
                                             <span class="align-middle">Tanaman Pangan</span>
                                         </a>
                                     </li>
+                                    @endif
+                                    @if (hasPermission('accsess_sector_horti'))
                                     <li>
                                         <a class="dropdown-item" href="{{ route('komoditas.sektor', 'hortikultura') }}">
                                             <i class="ti ti-flower me-2 text-warning"></i>
                                             <span class="align-middle">Hortikultura</span>
                                         </a>
                                     </li>
+                                    @endif
+                                    @if (hasPermission('accsess_sector_perkebunan'))
                                     <li>
                                         <a class="dropdown-item" href="{{ route('komoditas.sektor', 'perkebunan') }}">
                                             <i class="ti ti-tree me-2 text-danger"></i>
                                             <span class="align-middle">Perkebunan</span>
                                         </a>
                                     </li>
+                                    @endif
+                                    @if (hasPermission('accsess_sector_peternakan'))
                                     <li>
                                         <a class="dropdown-item" href="{{ route('komoditas.sektor', 'peternakan') }}">
                                             <i class="ti ti-paw me-2 text-info"></i>
                                             <span class="align-middle">Peternakan & Keswan</span>
                                         </a>
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

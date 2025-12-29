@@ -20,10 +20,10 @@ class RoleController extends Controller
         }
 
         // Get statistics for each role
-        $totalSuperAdmin = User::where('role', 'Super Admin')->count();
-        $totalAdminPusdatin = User::where('role', 'Admin Pusdatin')->count();
-        $totalAdminEselon = User::where('role', 'Admin Eselon')->count();
-        $totalUser = User::where('role', 'User')->count();
+        $totalSuperAdmin = User::where('role', 'superadmin')->count();
+        $totalAdminPusdatin = User::where('role', 'admin_pusdatin')->count();
+        $totalAdminEselon = User::where('role', 'admin_eselon')->count();
+        $totalUser = User::where('role', 'user')->count();
 
         return view('admin.index', compact(
             'totalSuperAdmin',
@@ -126,29 +126,41 @@ class RoleController extends Controller
     {
         try {
             $defaultPermissions = [
-                'Admin Pusdatin' => [
-                    'view_dashboard' => true,
+                 'superadmin' => [
                     'manage_komoditas' => true,
-                    'view_komoditas' => true,
                     'manage_psp' => true,
-                    'view_psp' => true,
-                    'export_data' => true,
-                    'import_data' => true,
-                    'approve_data' => true
+                    'access_sector_pangan' => true,
+                    'access_sector_horti'=> true,
+                    'access_sector_perkebunan' => true,
+                    'access_sector_peternakan' => true,
+                    'access_psp' => true
                 ],
-                'Admin Eselon' => [
-                    'view_dashboard' => true,
+                'admin_pusdatin' => [
                     'manage_komoditas' => true,
-                    'view_komoditas' => true,
                     'manage_psp' => true,
-                    'view_psp' => true,
-                    'export_data' => true,
-                    'import_data' => true
+                    'access_sector_pangan' => true,
+                    'access_sector_horti'=> true,
+                    'access_sector_perkebunan' => true,
+                    'access_sector_peternakan' => true,
+                    'access_psp' => true
+                ],
+                'admin_eselon' => [
+                    'manage_komoditas' => true,
+                    'manage_psp' => true,
+                    'access_sector_pangan' => true,
+                    'access_sector_horti'=> true,
+                    'access_sector_perkebunan' => true,
+                    'access_sector_peternakan' => true,
+                    'access_psp' => true
                 ],
                 'User' => [
-                    'view_dashboard' => true,
-                    'view_komoditas' => true,
-                    'view_psp' => true
+                    'manage_komoditas' => true,
+                    'manage_psp' => true,
+                    'access_sector_pangan' => true,
+                    'access_sector_horti'=> true,
+                    'access_sector_perkebunan' => true,
+                    'access_sector_peternakan' => true,
+                    'access_psp' => true
                 ]
             ];
 
