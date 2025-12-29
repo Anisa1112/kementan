@@ -96,11 +96,13 @@
                                         </a>
                                     </li>
                                 @endif
+                                @if (hasPermission('access_sector_horti'))
                                 <li class="menu-item {{ request()->is('komoditas/sektor/hortikultura') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'hortikultura') }}" class="menu-link">
                                         <div data-i18n="Hortikultura">Hortikultura</div>
                                     </a>
                                 </li>
+                                @endif
                                 <li class="menu-item {{ request()->is('komoditas/sektor/perkebunan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'perkebunan') }}" class="menu-link">
                                         <div data-i18n="Perkebunan">Perkebunan</div>
