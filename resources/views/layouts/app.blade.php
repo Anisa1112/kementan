@@ -103,16 +103,20 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (hasPermission('access_sector_perkebunan'))
                                 <li class="menu-item {{ request()->is('komoditas/sektor/perkebunan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'perkebunan') }}" class="menu-link">
                                         <div data-i18n="Perkebunan">Perkebunan</div>
                                     </a>
                                 </li>
-                                <li class="menu-item {{ request()->is('komoditas/sektor/peternakan') ? 'active' : '' }}">
+                                @endif
+                                @if (hasPermission('access_sector_peternakan'))
+                                 <li class="menu-item {{ request()->is('komoditas/sektor/peternakan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'peternakan') }}" class="menu-link">
                                         <div data-i18n="Peternakan">Peternakan & Kesehatan Hewan</div>
                                     </a>
                                 </li>
+                                @endif
                                 <li class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') == 'psp' ? 'active' : '' }}">
                                     <a href="{{ route('komoditas') }}?tab=psp" class="menu-link">
                                         <div data-i18n="Prasarana dan Sarana">Prasarana & Sarana</div>

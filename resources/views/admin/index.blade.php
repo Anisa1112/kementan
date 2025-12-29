@@ -100,7 +100,7 @@
                                         $savedPermissions = json_decode($jsonContent, true) ?? [];
                                     }
 
-                                    // Default permissions jika belum ada file 
+                                    // Default permissions jika belum ada file
                                     $defaultPermissions = [
                                         'superadmin' => [
                                             'manage_komoditas' => true,
@@ -141,6 +141,12 @@
                                         'user' => [
                                             'access_sector_pangan' => true,
                                             'access_sector_horti' => true,
+                                            'access_sector_perkebunan' => true,
+                                            'access_sector_peternakan' => true,
+                                            'access_psp_pangan' => true,
+                                            'access_psp_horti' => true,
+                                            'access_psp_perkebunan' => true,
+                                            'access_psp_peternakan' => true,
                                         ],
                                     ];
 
