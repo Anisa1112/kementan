@@ -115,7 +115,7 @@
                         <div class="card-body d-flex align-items-start justify-content-between">
                             <div class="content-left">
                                 <span class="text-muted d-block mb-1 small">Total PSP</span>
-                                <h3 class="mb-2 text-dark fw-bold">{{ $totalPsp ?? 0 }}</h3>
+                                <h3 class="mb-2 text-dark fw-bold">{{ $pspTotal ?? 0 }}</h3>
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">

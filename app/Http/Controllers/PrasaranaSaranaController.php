@@ -23,7 +23,7 @@ class PrasaranaSaranaController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('PSP Store Request:', $request->all());
+        
 
         try {
             $validated = $request->validate([
@@ -46,8 +46,8 @@ class PrasaranaSaranaController extends Controller
                 'item'     => $validated['item'],
                 'status'   => $validated['status'],
             ]);
-
-            Log::info('PSP Created:', $psp->toArray());
+            
+            $psp->save();
 
             return redirect()
                 ->route('komoditas.index', ['tab' => 'psp'])

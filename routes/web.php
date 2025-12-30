@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\KomoditasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PrasaranaSaranaController;
@@ -19,26 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // --- Home / Dashboard ---
-Route::get('/', function () {
-    // ✅ Gunakan withJenis() untuk filter hanya data yang punya jenis
-    $komoditas = Komoditas::withJenis()->latest()->get();
-
-    // ✅ Statistik berdasarkan sektor - HANYA yang punya jenis
-    $totalKomoditas = Komoditas::withJenis()->count();
-    $tanamanPangan  = Komoditas::withJenis()->where('sektor', 'Tanaman Pangan')->count();
-    $hortikultura   = Komoditas::withJenis()->where('sektor', 'Hortikultura')->count();
-    $perkebunan     = Komoditas::withJenis()->where('sektor', 'Perkebunan')->count();
-    $peternakan     = Komoditas::withJenis()->where('sektor', 'Peternakan & Kesehatan Hewan')->count();
-
-    return view('welcome', compact(
-        'komoditas',
-        'totalKomoditas',
-        'tanamanPangan',
-        'hortikultura',
-        'perkebunan',
-        'peternakan'
-    ));
-})->name('home');
+Route::get('/', [BaseController::class, 'index'])->name('home');
 
 // --- Master Komoditas ---
 Route::get('/komoditas', [KomoditasController::class, 'index'])->name('komoditas');
