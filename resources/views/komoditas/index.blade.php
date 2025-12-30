@@ -29,12 +29,15 @@
                         <i class="ti ti-leaf me-2"></i>Komoditas Pertanian
                     </button>
                 </li>
+                @if (hasPermission('access_sector_psp'))
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {{ request('tab') == 'psp' ? 'active' : '' }}" id="psp-tab"
                         data-bs-toggle="tab" data-bs-target="#psp" type="button" role="tab">
                         <i class="ti ti-tools me-2"></i>Prasarana & Sarana Pertanian
                     </button>
                 </li>
+
+                @endif
             </ul>
 
             <!-- Tab Content -->
@@ -205,6 +208,7 @@
                 </div>
                 <!-- END TAB KOMODITAS -->
 
+@if (hasPermission('access_sector_psp'))
                 <!-- TAB 2: PRASARANA & SARANA -->
                 <div class="tab-pane fade {{ request('tab') == 'psp' ? 'show active' : '' }}" id="psp"
                     role="tabpanel">
@@ -301,6 +305,7 @@
                     </div>
                 </div>
                 <!-- END TAB PSP -->
+@endif
 
             </div>
             <!-- END TAB CONTENT -->
