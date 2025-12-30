@@ -46,13 +46,10 @@ Route::get('/komoditas', [KomoditasController::class, 'index'])->name('komoditas
 // --- Komoditas per Sektor ---
 Route::get('/komoditas/sektor/{sektor}', [KomoditasController::class, 'sektor'])->name('komoditas.sektor');
 
-// --- Komoditas CRUD (dengan auth) ---
-Route::middleware(['auth'])->group(function () {
     Route::post('/komoditas', [KomoditasController::class, 'store'])->name('komoditas.store');
     Route::get('/komoditas/detail/{id}', [KomoditasController::class, 'show'])->name('komoditas.detail');
     Route::put('/komoditas/{id}', [KomoditasController::class, 'update'])->name('komoditas.update');
     Route::delete('/komoditas/{id}', [KomoditasController::class, 'destroy'])->name('komoditas.destroy');
-});
 
 // --- Admin Dashboard ---
 Route::middleware(['auth'])->group(function () {
@@ -85,13 +82,13 @@ Route::middleware(['auth'])->group(function () {
 // --- PSP (Prasarana & Sarana) ---
 Route::get('/psp', [PrasaranaSaranaController::class, 'index'])->name('psp.index');
 
-Route::middleware(['auth'])->group(function () {
+
     // PSP Routes
     Route::post('/psp/store', [PrasaranaSaranaController::class, 'store'])->name('psp.store');
     Route::get('/psp/{id}', [PrasaranaSaranaController::class, 'show'])->name('psp.show');
     Route::put('/psp/{id}', [PrasaranaSaranaController::class, 'update'])->name('psp.update');
     Route::delete('/psp/{id}', [PrasaranaSaranaController::class, 'destroy'])->name('psp.destroy');
-});
+
 
 // routes/web.php
 use App\Http\Controllers\RoleController;

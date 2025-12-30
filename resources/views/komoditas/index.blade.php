@@ -472,8 +472,6 @@
             @endforeach
 
             {{-- Modal Tambah Komoditas --}}
-            @auth
-                @if (auth()->user()->canCRUD())
                     <div class="modal fade" id="createModalKomoditas" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -663,8 +661,6 @@
                             }
                         });
                     </script>
-                @endif
-            @endauth
 
             {{-- MODALS PSP --}}
             @foreach ($psp as $item)

@@ -11,7 +11,7 @@ class PermissionHelper
 
         if ($user->role === 'superadmin') return true;
 
-        $path = storage_path('app/permissions.json');
+        $path = storage_path('app/role_permissions.json');
         if (!file_exists($path)) return false;
 
         $permissions = json_decode(file_get_contents($path), true);
