@@ -243,74 +243,75 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-@foreach ($psp as $index => $item)
-    <tr>
-        {{-- No --}}
-        <td>{{ $psp->firstItem() + $index }}</td>
+                                                @foreach ($psp as $index => $item)
+                                                    <tr>
+                                                        {{-- No --}}
+                                                        <td>{{ $psp->firstItem() + $index }}</td>
 
-        {{-- Kode --}}
-        <td>
-            <span class="badge bg-dark">{{ $item->kode }}</span>
-        </td>
+                                                        {{-- Kode --}}
+                                                        <td>
+                                                            <span class="badge bg-dark">{{ $item->kode }}</span>
+                                                        </td>
 
-        {{-- Sektor --}}
-        <td>{{ $item->sektor }}</td>
+                                                        {{-- Sektor --}}
+                                                        <td>{{ $item->sektor }}</td>
 
-        {{-- Jenis --}}
-        <td>{{ $item->jenis }}</td>
+                                                        {{-- Jenis --}}
+                                                        <td>{{ $item->jenis }}</td>
 
-        {{-- Kategori --}}
-        <td>{{ $item->kategori }}</td>
+                                                        {{-- Kategori --}}
+                                                        <td>{{ $item->kategori }}</td>
 
-        {{-- Item --}}
-        <td class="text-truncate" style="max-width: 250px;">
-            {{ $item->item }}
-        </td>
+                                                        {{-- Item --}}
+                                                        <td class="text-truncate" style="max-width: 250px;">
+                                                            {{ $item->item }}
+                                                        </td>
 
-        {{-- Status --}}
-        <td class="text-center">
-            <span class="badge bg-{{ $item->status == 'Aktif' ? 'success' : 'secondary' }}">
-                {{ $item->status }}
-            </span>
-        </td>
+                                                        {{-- Status --}}
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge bg-{{ $item->status == 'Aktif' ? 'success' : 'secondary' }}">
+                                                                {{ $item->status }}
+                                                            </span>
+                                                        </td>
 
-        {{-- Aksi --}}
-        <td class="text-center text-nowrap">
-            <button type="button"
-                class="btn btn-sm btn-icon btn-outline-info"
-                data-bs-toggle="modal"
-                data-bs-target="#detailModalPSP{{ $item->id }}"
-                title="Lihat Detail">
-                <i class="ti ti-eye"></i>
-            </button>
+                                                        {{-- Aksi --}}
+                                                        <td class="text-center text-nowrap">
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-icon btn-outline-info"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#detailModalPSP{{ $item->id }}"
+                                                                title="Lihat Detail">
+                                                                <i class="ti ti-eye"></i>
+                                                            </button>
 
-            @if (hasPermission('manage_komoditas'))
-                <button type="button"
-                    class="btn btn-sm btn-icon btn-outline-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editModalPSP{{ $item->id }}"
-                    title="Edit">
-                    <i class="ti ti-edit"></i>
-                </button>
+                                                            @if (hasPermission('manage_komoditas'))
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-outline-warning"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editModalPSP{{ $item->id }}"
+                                                                    title="Edit">
+                                                                    <i class="ti ti-edit"></i>
+                                                                </button>
 
-                <button type="button"
-                    class="btn btn-sm btn-icon btn-outline-danger"
-                    onclick="confirmDelete('psp', {{ $item->id }})"
-                    title="Hapus">
-                    <i class="ti ti-trash"></i>
-                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-outline-danger"
+                                                                    onclick="confirmDelete('psp', {{ $item->id }})"
+                                                                    title="Hapus">
+                                                                    <i class="ti ti-trash"></i>
+                                                                </button>
 
-                <form id="delete-form-psp-{{ $item->id }}"
-                    action="{{ route('psp.destroy', $item->id) }}"
-                    method="POST" style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                </form>
-            @endif
-        </td>
-    </tr>
-@endforeach
-</tbody>
+                                                                <form id="delete-form-psp-{{ $item->id }}"
+                                                                    action="{{ route('psp.destroy', $item->id) }}"
+                                                                    method="POST" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
 
 
                                         </table>
@@ -697,80 +698,82 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title text-white"><i class="ti ti-info-circle me-2"></i>Detail Prasarana & Sarana
+                                <h5 class="modal-title text-white"><i class="ti ti-info-circle me-2"></i>Detail Prasarana
+                                    & Sarana
                                 </h5>
                                 <button type="button" class="btn-close btn-close-white"
                                     data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                               <div class="row g-3">
-    {{-- KIRI --}}
-    <div class="col-md-6">
-        <table class="table table-borderless table-sm mb-0">
-            <tbody>
-                <tr>
-                    <td class="text-muted small" style="width: 120px;">Kode</td>
-                    <td>
-                        <span class="badge bg-dark">{{ $item->kode }}</span>
-                    </td>
-                </tr>
+                                <div class="row g-3">
+                                    {{-- KIRI --}}
+                                    <div class="col-md-6">
+                                        <table class="table table-borderless table-sm mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-muted small" style="width: 120px;">Kode</td>
+                                                    <td>
+                                                        <span class="badge bg-dark">{{ $item->kode }}</span>
+                                                    </td>
+                                                </tr>
 
-                <tr>
-                    <td class="text-muted small">Sektor</td>
-                    <td>{{ $item->sektor }}</td>
-                </tr>
+                                                <tr>
+                                                    <td class="text-muted small">Sektor</td>
+                                                    <td>{{ $item->sektor }}</td>
+                                                </tr>
 
-                <tr>
-                    <td class="text-muted small">Jenis</td>
-                    <td>{{ $item->jenis }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                                <tr>
+                                                    <td class="text-muted small">Jenis</td>
+                                                    <td>{{ $item->jenis }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-    {{-- KANAN --}}
-    <div class="col-md-6">
-        <table class="table table-borderless table-sm mb-0">
-            <tbody>
-                <tr>
-                    <td class="text-muted small" style="width: 120px;">Status</td>
-                    <td>
-                        <span class="badge bg-{{ $item->status == 'Aktif' ? 'success' : 'secondary' }}">
-                            {{ $item->status }}
-                        </span>
-                    </td>
-                </tr>
+                                    {{-- KANAN --}}
+                                    <div class="col-md-6">
+                                        <table class="table table-borderless table-sm mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-muted small" style="width: 120px;">Status</td>
+                                                    <td>
+                                                        <span
+                                                            class="badge bg-{{ $item->status == 'Aktif' ? 'success' : 'secondary' }}">
+                                                            {{ $item->status }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
 
-                <tr>
-                    <td class="text-muted small">Kategori</td>
-                    <td>{{ $item->kategori }}</td>
-                </tr>
+                                                <tr>
+                                                    <td class="text-muted small">Kategori</td>
+                                                    <td>{{ $item->kategori }}</td>
+                                                </tr>
 
-                <tr>
-                    <td class="text-muted small">Item</td>
-                    <td class="text-wrap">
-                        {{ $item->item }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                                <tr>
+                                                    <td class="text-muted small">Item</td>
+                                                    <td class="text-wrap">
+                                                        {{ $item->item }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-    {{-- FOOTER --}}
-    <div class="col-12">
-        <hr class="my-2">
-        <div class="d-flex justify-content-between text-muted small">
-            <span>
-                <i class="ti ti-calendar-plus me-1"></i>
-                Dibuat {{ $item->created_at->format('d M Y H:i') }}
-            </span>
-            <span>
-                <i class="ti ti-calendar-edit me-1"></i>
-                Diubah {{ $item->updated_at->format('d M Y H:i') }}
-            </span>
-        </div>
-    </div>
-</div>
+                                    {{-- FOOTER --}}
+                                    <div class="col-12">
+                                        <hr class="my-2">
+                                        <div class="d-flex justify-content-between text-muted small">
+                                            <span>
+                                                <i class="ti ti-calendar-plus me-1"></i>
+                                                Dibuat {{ $item->created_at->format('d M Y H:i') }}
+                                            </span>
+                                            <span>
+                                                <i class="ti ti-calendar-edit me-1"></i>
+                                                Diubah {{ $item->updated_at->format('d M Y H:i') }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="modal-footer">

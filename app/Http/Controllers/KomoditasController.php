@@ -12,45 +12,48 @@ class KomoditasController extends Controller
     /* =========================
      * DASHBOARD (WELCOME)
      * ========================= */
-    public function dashboard(Request $request)
-    {
-        $query = Komoditas::withJenis(); // ✅ Hanya yang punya jenis (tetap)
+  public function dashboard(Request $request)
+{
+    $query = Komoditas::withJenis();
 
-        // Filter SEKTOR (diubah dari subsektor)
-        if ($request->filled('sektor')) {
-            $query->where('sektor', $request->sektor);
-        }
-
-        // Filter Status
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        // Filter Pencarian
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('kode', 'like', '%' . $request->search . '%')
-                  ->orWhere('sektor', 'like', '%' . $request->search . '%')
-                  ->orWhere('subsektor', 'like', '%' . $request->search . '%')
-                  ->orWhere('kategori', 'like', '%' . $request->search . '%')
-                  ->orWhere('item', 'like', '%' . $request->search . '%')
-                  ->orWhere('jenis', 'like', '%' . $request->search . '%')
-                  ->orWhere('nama_latin', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        $komoditas = $query->orderBy('created_at', 'desc')->get();
-
-        return view('welcome', [
-            'komoditas'        => $komoditas,
-            'totalKomoditas'   => Komoditas::withJenis()->count(),
-            'tanamanPangan'    => Komoditas::withJenis()->where('sektor', 'Tanaman Pangan')->count(),
-            'hortikultura'     => Komoditas::withJenis()->where('sektor', 'Hortikultura')->count(),
-            'perkebunan'       => Komoditas::withJenis()->where('sektor', 'Perkebunan')->count(),
-            'peternakan'       => Komoditas::withJenis()->where('sektor', 'Peternakan & Kesehatan Hewan')->count(),
-            'prasaranaSarana'  => Komoditas::withJenis()->where('sektor', 'Prasarana & Sarana')->count(),
-        ]);
+    if ($request->filled('sektor')) {
+        $query->where('sektor', $request->sektor);
     }
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    if ($request->filled('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('kode', 'like', '%' . $request->search . '%')
+              ->orWhere('sektor', 'like', '%' . $request->search . '%')
+              ->orWhere('subsektor', 'like', '%' . $request->search . '%')
+              ->orWhere('kategori', 'like', '%' . $request->search . '%')
+              ->orWhere('item', 'like', '%' . $request->search . '%')
+              ->orWhere('jenis', 'like', '%' . $request->search . '%')
+              ->orWhere('nama_latin', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $komoditas = $query->orderBy('created_at', 'desc')->get();
+
+    // ✅ TAMBAHKAN INI - Data PSP
+    $psp = PrasaranaSarana::orderBy('created_at', 'desc')->get();
+    $totalPsp = PrasaranaSarana::count();
+
+    return view('welcome', [
+        'komoditas'        => $komoditas,
+        'totalKomoditas'   => Komoditas::withJenis()->count(),
+        'tanamanPangan'    => Komoditas::withJenis()->where('sektor', 'Tanaman Pangan')->count(),
+        'hortikultura'     => Komoditas::withJenis()->where('sektor', 'Hortikultura')->count(),
+        'perkebunan'       => Komoditas::withJenis()->where('sektor', 'Perkebunan')->count(),
+        'peternakan'       => Komoditas::withJenis()->where('sektor', 'Peternakan & Kesehatan Hewan')->count(),
+        'prasaranaSarana'  => Komoditas::withJenis()->where('sektor', 'Prasarana & Sarana')->count(),
+        'psp'              => $psp,        // ✅ TAMBAHKAN
+        'totalPsp'         => $totalPsp,   // ✅ TAMBAHKAN
+    ]);
+}
 
     /* =========================
      * MASTER KOMODITAS
@@ -138,7 +141,7 @@ class KomoditasController extends Controller
 
             return redirect()->route('komoditas')
                 ->with('success', 'Data komoditas berhasil ditambahkan!');
-                
+
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Gagal menambahkan data: ' . $e->getMessage())
@@ -176,7 +179,7 @@ class KomoditasController extends Controller
 
             return redirect()->route('komoditas')
                 ->with('success', 'Data komoditas berhasil diperbarui!');
-                
+
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Gagal memperbarui data: ' . $e->getMessage())
@@ -194,7 +197,7 @@ class KomoditasController extends Controller
 
             return redirect()->route('komoditas')
                 ->with('success', 'Data komoditas berhasil dihapus!');
-                
+
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
@@ -232,7 +235,7 @@ class KomoditasController extends Controller
 
     if ($subsektor) {
         $words = explode(' ', $subsektor);
-        
+
         if (count($words) >= 2) {
             // Ambil 2 huruf pertama dari kata pertama + 1 huruf pertama kata kedua
             // Tanaman Obat → TA + O = TAO
@@ -253,7 +256,7 @@ class KomoditasController extends Controller
 
     if ($kategori) {
         $words = explode(' ', $kategori);
-        
+
         if (count($words) >= 2) {
             // Kategori dengan 2+ kata: ambil huruf pertama setiap kata
             // Rumput Pakan → RP
