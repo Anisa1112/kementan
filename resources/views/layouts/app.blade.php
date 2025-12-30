@@ -82,54 +82,72 @@
 
 
                     <!-- Komoditas (Dropdown) -->
+                    <li
+                        class="menu-item
+    {{ request()->is('komoditas/sektor/*') || (request()->routeIs('komoditas') && request()->get('tab') == 'psp')
+        ? 'active open'
+        : '' }}">
 
-                        <li class="menu-item {{ request()->is('komoditas/sektor/*') || request()->is('psp') ? 'active open' : '' }}">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons ti ti-database"></i>
-                                <div data-i18n="Komoditas">Komoditas</div>
-                            </a>
-                            <ul class="menu-sub">
-                                @if (hasPermission('access_sector_pangan'))
-                                    <li class="menu-item {{ request()->is('komoditas/sektor/tanaman-pangan') ? 'active' : '' }}">
-                                        <a href="{{ route('komoditas.sektor', 'tanaman-pangan') }}" class="menu-link">
-                                            <div data-i18n="Tanaman Pangan">Tanaman Pangan</div>
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (hasPermission('access_sector_horti'))
-                                <li class="menu-item {{ request()->is('komoditas/sektor/hortikultura') ? 'active' : '' }}">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons ti ti-database"></i>
+                            <div data-i18n="Komoditas">Komoditas</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            @if (hasPermission('access_sector_pangan'))
+                                <li
+                                    class="menu-item {{ request()->is('komoditas/sektor/tanaman-pangan') ? 'active' : '' }}">
+                                    <a href="{{ route('komoditas.sektor', 'tanaman-pangan') }}" class="menu-link">
+                                        <div data-i18n="Tanaman Pangan">Tanaman Pangan</div>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (hasPermission('access_sector_horti'))
+                                <li
+                                    class="menu-item {{ request()->is('komoditas/sektor/hortikultura') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'hortikultura') }}" class="menu-link">
                                         <div data-i18n="Hortikultura">Hortikultura</div>
                                     </a>
                                 </li>
-                                @endif
-                                @if (hasPermission('access_sector_perkebunan'))
-                                <li class="menu-item {{ request()->is('komoditas/sektor/perkebunan') ? 'active' : '' }}">
+                            @endif
+
+                            @if (hasPermission('access_sector_perkebunan'))
+                                <li
+                                    class="menu-item {{ request()->is('komoditas/sektor/perkebunan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'perkebunan') }}" class="menu-link">
                                         <div data-i18n="Perkebunan">Perkebunan</div>
                                     </a>
                                 </li>
-                                @endif
-                                @if (hasPermission('access_sector_peternakan'))
-                                 <li class="menu-item {{ request()->is('komoditas/sektor/peternakan') ? 'active' : '' }}">
+                            @endif
+
+                            @if (hasPermission('access_sector_peternakan'))
+                                <li
+                                    class="menu-item {{ request()->is('komoditas/sektor/peternakan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'peternakan') }}" class="menu-link">
                                         <div data-i18n="Peternakan">Peternakan & Kesehatan Hewan</div>
                                     </a>
                                 </li>
-                                @endif
-                                @if (hasPermission('access_psp'))
-                                <li class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') == 'psp' ? 'active' : '' }}">
-                                    <a href="{{ route('komoditas') }}?tab=psp" class="menu-link">
+                            @endif
+
+                            @if (hasPermission('access_psp'))
+                                <li
+                                    class="menu-item
+                {{ request()->routeIs('komoditas') && request()->get('tab') == 'psp' ? 'active' : '' }}">
+
+                                    <a href="{{ route('komoditas', ['tab' => 'psp']) }}" class="menu-link">
                                         <div data-i18n="Prasarana dan Sarana">Prasarana & Sarana</div>
                                     </a>
                                 </li>
-                                @endif
-                            </ul>
-                        </li>
+                            @endif
+                        </ul>
+                    </li>
+
 
 
                     <!-- Data Komoditas -->
-                    <li class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') != 'psp' ? 'active' : '' }}">
+                    <li
+                        class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') != 'psp' ? 'active' : '' }}">
                         <a href="{{ route('komoditas') }}" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-table"></i>
                             <div data-i18n="Data Komoditas">Data Komoditas</div>
@@ -138,7 +156,7 @@
 
                     <!-- Admin Panel -->
                     @auth
-                        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'superadmin')
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'superadmin')
                             <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
                                 <a href="{{ route('admin') }}" class="menu-link">
                                     <i class="menu-icon tf-icons ti ti-settings"></i>
@@ -155,7 +173,7 @@
             <!-- Layout page -->
             <div class="layout-page">
 
-             <!-- Navbar -->
+                <!-- Navbar -->
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -168,7 +186,8 @@
                         <!-- Quick Menu -->
                         <div class="navbar-nav align-items-center">
                             <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle px-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle px-0" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
                                     <i class="ti ti-layout-grid ti-md me-2"></i>
                                     <span class="d-none d-md-inline-block text-muted">Menu Cepat</span>
                                 </a>
@@ -188,44 +207,6 @@
                                             <span class="align-middle">Data Master Komoditas</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <h6 class="dropdown-header">Data Per Sektor</h6>
-                                    </li>
-                                    @if (hasPermission('accsess_sector_pangan'))
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('komoditas.sektor', 'tanaman-pangan') }}">
-                                            <i class="ti ti-plant-2 me-2 text-success"></i>
-                                            <span class="align-middle">Tanaman Pangan</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @if (hasPermission('accsess_sector_horti'))
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('komoditas.sektor', 'hortikultura') }}">
-                                            <i class="ti ti-flower me-2 text-warning"></i>
-                                            <span class="align-middle">Hortikultura</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @if (hasPermission('accsess_sector_perkebunan'))
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('komoditas.sektor', 'perkebunan') }}">
-                                            <i class="ti ti-tree me-2 text-danger"></i>
-                                            <span class="align-middle">Perkebunan</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @if (hasPermission('accsess_sector_peternakan'))
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('komoditas.sektor', 'peternakan') }}">
-                                            <i class="ti ti-paw me-2 text-info"></i>
-                                            <span class="align-middle">Peternakan & Keswan</span>
-                                        </a>
-                                    </li>
-                                    @endif
                                 </ul>
                             </div>
                         </div>

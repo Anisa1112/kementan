@@ -13,10 +13,11 @@ class PrasaranaSarana extends Model
 
     protected $fillable = [
         'kode',
-        'nama',
+        'sektor',
         'jenis',
-        'subsektor',
-        'status',
-        // 'deskripsi', // HAPUS INI
+        'kategori',
+        'item',
+        'status'
     ];
+
 }

@@ -100,24 +100,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
 
-    Route::get('/horti', function () {
-        return view('horti.index');
-    })->middleware('permission:horti')->name('horti.index');
-
-    Route::get('/perikanan', function () {
-        return view('perikanan.index');
-    })->middleware('permission:perikanan')->name('perikanan.index');
-
-    Route::get('/peternakan', function () {
-        return view('peternakan.index');
-    })->middleware('permission:peternakan')->name('peternakan.index');
-
-    Route::get('/perkebunan', function () {
-        return view('perkebunan.index');
-    })->middleware('permission:perkebunan')->name('perkebunan.index');
-});
 
 
 

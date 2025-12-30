@@ -4,78 +4,97 @@ namespace App\Http\Controllers;
 
 use App\Models\PrasaranaSarana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PrasaranaSaranaController extends Controller
 {
+    /**
+     * Menampilkan daftar PSP
+     */
     public function index()
     {
-        $psp = PrasaranaSarana::orderBy('created_at','desc')->paginate(10);
+        $psp = PrasaranaSarana::orderBy('created_at', 'desc')->paginate(10);
         return view('psp.index', compact('psp'));
     }
 
-  public function store(Request $request)
-{
-    \Log::info('PSP Store Request:', $request->all());
-    
-    try {
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'jenis' => 'required|string',
-            'status' => 'required|string',
-        ]);
-        
-        // Generate kode
-        $lastCode = \DB::table('prasarana_sarana')->max('kode');
-        $num = $lastCode ? (intval(substr($lastCode, 3)) + 1) : 1;
-        $kode = 'PSP' . str_pad($num, 3, '0', STR_PAD_LEFT);
-        
-        // Insert TANPA deskripsi
-        $id = \DB::table('prasarana_sarana')->insertGetId([
-            'kode' => $kode,
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'status' => $request->status,
-            'subsektor' => $request->subsektor ?? 'Umum',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        
-        \Log::info('PSP Created:', ['id' => $id, 'kode' => $kode]);
-        
-        return redirect()->route('komoditas', ['tab' => 'psp'])
-                         ->with('success', 'Data PSP berhasil ditambahkan! Kode: ' . $kode);
-        
-    } catch (\Exception $e) {
-        \Log::error('PSP Store Error:', ['message' => $e->getMessage()]);
-        return redirect()->route('komoditas', ['tab' => 'psp'])
-                         ->with('error', 'Gagal menyimpan: ' . $e->getMessage());
+    /**
+     * Menyimpan data PSP baru
+     * sektor DIKUNCI = PSP
+     */
+    public function store(Request $request)
+    {
+        Log::info('PSP Store Request:', $request->all());
+
+        try {
+            $validated = $request->validate([
+                'jenis'    => 'required|string|max:100',
+                'kategori' => 'required|string|max:150',
+                'item'     => 'required|string|max:150',
+                'status'   => 'required|in:Aktif,Nonaktif',
+            ]);
+
+            // Generate kode PSP otomatis
+            $lastCode = PrasaranaSarana::max('kode');
+            $num = $lastCode ? ((int) substr($lastCode, 3) + 1) : 1;
+            $kode = 'PSP' . str_pad($num, 3, '0', STR_PAD_LEFT);
+
+            $psp = PrasaranaSarana::create([
+                'kode'     => $kode,
+                'sektor'   => 'PSP', // 🔒 dikunci
+                'jenis'    => $validated['jenis'],
+                'kategori' => $validated['kategori'],
+                'item'     => $validated['item'],
+                'status'   => $validated['status'],
+            ]);
+
+            Log::info('PSP Created:', $psp->toArray());
+
+            return redirect()
+                ->route('komoditas.index', ['tab' => 'psp'])
+                ->with('success', 'Data PSP berhasil ditambahkan! Kode: ' . $kode);
+
+        } catch (\Exception $e) {
+            Log::error('PSP Store Error:', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Gagal menyimpan data PSP');
+        }
     }
-}
 
-public function update(Request $request, $id)
-{
-    $psp = PrasaranaSarana::findOrFail($id);
+    /**
+     * Memperbarui data PSP
+     * sektor tetap PSP (tidak bisa diubah)
+     */
+    public function update(Request $request, $id)
+    {
+        $psp = PrasaranaSarana::findOrFail($id);
 
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'jenis' => 'required|string',
-        'status' => 'required|string',
-    ]);
-
-    // Update TANPA deskripsi
-    \DB::table('prasarana_sarana')
-        ->where('id', $id)
-        ->update([
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'status' => $request->status,
-            'subsektor' => $request->subsektor ?? 'Umum',
-            'updated_at' => now(),
+        $validated = $request->validate([
+            'jenis'    => 'required|string|max:100',
+            'kategori' => 'required|string|max:150',
+            'item'     => 'required|string|max:150',
+            'status'   => 'required|in:Aktif,Nonaktif',
         ]);
 
-    return redirect()->route('komoditas.index', ['tab' => 'psp'])
-                     ->with('success', 'Data PSP berhasil diperbarui');
-}
+        $psp->update([
+            'jenis'    => $validated['jenis'],
+            'kategori' => $validated['kategori'],
+            'item'     => $validated['item'],
+            'status'   => $validated['status'],
+            // sektor tidak disentuh
+        ]);
+
+        return redirect()
+            ->route('komoditas.index', ['tab' => 'psp'])
+            ->with('success', 'Data PSP berhasil diperbarui');
+    }
+
+    /**
+     * Menghapus data PSP
+     */
     public function destroy($id)
     {
         $psp = PrasaranaSarana::findOrFail($id);
