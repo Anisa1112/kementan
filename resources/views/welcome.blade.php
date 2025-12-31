@@ -29,9 +29,12 @@
                                 </small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-primary">
-                                    <i class="ti ti-database ti-sm"></i>
-                                </span>
+                              <a href="{{ route('komoditas') }}" class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-primary">
+        <i class="ti ti-database ti-sm"></i>
+    </span>
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -47,9 +50,13 @@
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-success">
-                                    <i class="ti ti-plant ti-sm"></i>
-                                </span>
+                                <a href="{{ route('komoditas.sektor', ['sektor' => 'tanaman-pangan']) }}"
+   class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-success" style="cursor:pointer;">
+        <i class="ti ti-plant ti-sm"></i>
+    </span>
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -65,9 +72,13 @@
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-warning">
-                                    <i class="ti ti-flower ti-sm"></i>
-                                </span>
+                               <a href="{{ route('komoditas.sektor', ['sektor' => 'hortikultura']) }}"
+   class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-warning" style="cursor:pointer;">
+        <i class="ti ti-flower ti-sm"></i>
+    </span>
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -83,9 +94,13 @@
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-danger">
-                                    <i class="ti ti-tree ti-sm"></i>
-                                </span>
+                               <a href="{{ route('komoditas.sektor', ['sektor' => 'perkebunan']) }}"
+   class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-danger" style="cursor:pointer;">
+        <i class="ti ti-tree ti-sm"></i>
+    </span>
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -101,9 +116,13 @@
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-info">
-                                    <i class="ti ti-paw ti-sm"></i>
-                                </span>
+                               <a href="{{ route('komoditas.sektor', ['sektor' => 'peternakan']) }}"
+   class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-info" style="cursor:pointer;">
+        <i class="ti ti-paw ti-sm"></i>
+    </span>
+</a>
+
                             </div>
                         </div>
                     </div>
@@ -119,9 +138,14 @@
                                 <small class="text-muted">Total data</small>
                             </div>
                             <div class="avatar">
-                                <span class="avatar-initial rounded bg-label-dark">
-                                    <i class="ti ti-file-text ti-sm"></i>
-                                </span>
+                               <a href="{{ route('komoditas', ['tab' => 'psp']) }}"
+   class="text-decoration-none">
+    <span class="avatar-initial rounded bg-label-dark" style="cursor:pointer;">
+        <i class="ti ti-file-text ti-sm"></i>
+    </span>
+</a>
+
+
                             </div>
                         </div>
                     </div>
@@ -217,14 +241,6 @@
                         @endif
                     </div>
 
-                    @if ($komoditas->count() > 10)
-                        <div class="mt-3 text-center">
-                            <p class="text-muted mb-2">Menampilkan 10 dari {{ $komoditas->count() }} data</p>
-                            <a href="{{ route('komoditas') }}" class="btn btn-sm btn-primary">
-                                <i class="ti ti-arrow-right me-1"></i>Lihat Semua Data
-                            </a>
-                        </div>
-                    @endif
                 </div>
             </div>
 

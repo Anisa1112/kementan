@@ -125,7 +125,7 @@
                                 <li
                                     class="menu-item {{ request()->is('komoditas/sektor/peternakan') ? 'active' : '' }}">
                                     <a href="{{ route('komoditas.sektor', 'peternakan') }}" class="menu-link">
-                                        <div data-i18n="Peternakan">Peternakan & Kesehatan Hewan</div>
+                                        <div data-i18n="Peternakan & Kesehatan Hewan">Peternakan & Kesehatan Hewan</div>
                                     </a>
                                 </li>
                             @endif
@@ -150,7 +150,7 @@
                         class="menu-item {{ request()->routeIs('komoditas') && request()->get('tab') != 'psp' ? 'active' : '' }}">
                         <a href="{{ route('komoditas') }}" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-table"></i>
-                            <div data-i18n="Data Komoditas">Data Komoditas</div>
+                            <div data-i18n="Data Master Komoditas">Data Master Komoditas</div>
                         </a>
                     </li>
 
